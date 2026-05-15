@@ -1,5 +1,5 @@
 ---
-name: java-code-review
+name: java-coding-review
 description: "Java 代码验证与审查。编译检查 + 基于编码规范的 diff 审查 + 自动修复。TRIGGER when: 任何 Java 代码变更完成后需要验证时，或用户主动要求审查代码。SKIP: 纯阅读分析、不涉及代码变更的任务。"
 ---
 
