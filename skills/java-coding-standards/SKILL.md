@@ -35,6 +35,8 @@ Spring Boot + MyBatis-Plus 项目的编码规范。
 - **禁止**: 包含业务逻辑判断
 - **异常处理**: 不直接处理异常，由全局异常处理器统一处理
 - **参数校验**: 使用 Jakarta Validation 注解
+- **接口方法限制**: 对外接口只使用 `@GetMapping` 和 `@PostMapping`，禁止使用 `@PutMapping`、`@DeleteMapping`、`@PatchMapping`
+- **接口路径风格**: 不使用标准 RESTful 风格的路径变量接口，禁止使用 `@PathVariable`；详情、删除、取消等操作使用明确动作路径和 query/body 参数，例如 `GET /xxx/detail?id=1`、`POST /xxx/cancel`
 
 ## Service 层
 - **职责**: 处理业务逻辑和数据转换
@@ -48,6 +50,8 @@ Spring Boot + MyBatis-Plus 项目的编码规范。
 ## Entity 和 Model 规范
 - **Entity 类**: 只包含数据库字段映射
 - **Model/DTO 类**: 正确使用 Req/Resp 后缀，转换代码放在对应类中作为静态方法
+- **请求/响应参数注释**: 所有 `Req`/`Resp` 类字段必须添加中文注释，说明字段含义、单位、枚举取值和空值语义
+- **Controller 参数注释**: GET query 参数、路径动作参数等没有 DTO 字段承载的接口参数，必须在 Controller 方法 JavaDoc 中用中文 `@param` 和 `@return` 说明
 
 ```java
 @Data
@@ -183,6 +187,8 @@ List<UserResp> list = JsonUtils.parseJsonToList(json, UserResp.class);
 - **接口描述**: 使用中文描述接口功能
 - **参数说明**: 中文说明每个参数的含义和约束
 - **响应说明**: 中文说明响应数据的结构和含义
+- **HTTP 方法**: 对外接口只允许 GET 和 POST；查询类接口使用 GET，新增、修改、删除、取消、提交、生成等动作类接口使用 POST
+- **路径约定**: 不采用标准 RESTful 的 `PUT /resource/{id}`、`DELETE /resource/{id}`、`GET /resource/{id}` 写法；使用动作化路径，如 `/resource/update`、`/resource/delete`、`/resource/detail`
 
 ---
 
