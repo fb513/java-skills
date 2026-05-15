@@ -1,5 +1,5 @@
 ---
-name: java-design-doc-development
+name: java-development
 description: "Java 后端专用。基于设计文档进行 Java 后端开发。TRIGGER when: 用户指定一个设计文档目录（如 docs/plans/xxx/）并要求实现其中的接口。SKIP: 单个小改动、纯阅读分析、不涉及设计文档的任务。"
 ---
 
