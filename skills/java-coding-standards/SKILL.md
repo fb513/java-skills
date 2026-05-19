@@ -199,7 +199,7 @@ List<UserResp> list = JsonUtils.parseJsonToList(json, UserResp.class);
 
 ```java
 new LambdaQueryWrapper<UserEntity>()
-    .select(UserEntity::getId, UserEntity::getName, UserEntity::getStatus)
+        .select(UserEntity::getId, UserEntity::getName, UserEntity::getStatus)
     .eq(UserEntity::getStatus, 1)
     .orderByDesc(UserEntity::getId);
 ```
@@ -223,10 +223,11 @@ mapper.insert(entityList);
 
 ```java
 List<Entity> entityList = ...;
-entityList.forEach(e -> e.setStatus(1));
-mapper.updateById(entityList);
+        entityList.forEach(e -> e.setStatus(1));
+        mapper.updateById(entityList);
 ```
-- **复杂查询**: 优先使用 XML 映射文件
+- **SQL 位置**: 业务 SQL 必须写在 `src/main/resources/mapper/*.xml` 中，Mapper Java 接口只保留方法签名和 `@Param` 参数声明；禁止在 Mapper 接口中使用 `@Select`、`@Insert`、`@Update`、`@Delete` 等注解编写 SQL
+- **复杂查询**: 必须使用 XML 映射文件
 
 ## 性能优化
 - **避免循环查询**: 避免在 for 循环中进行 SQL 操作，优先使用批量查询和更新
@@ -236,14 +237,14 @@ mapper.updateById(entityList);
 List<OrderEntity> orders = orderMapper.selectList(...);
 Set<Long> userIds = orders.stream().map(OrderEntity::getUserId).collect(Collectors.toSet());
 if (CollectionUtils.isEmpty(userIds)) {
-    return Collections.emptyList();
+        return Collections.emptyList();
 }
 List<UserEntity> users = userMapper.selectList(
-    new LambdaQueryWrapper<UserEntity>()
-        .select(UserEntity::getId, UserEntity::getName)
-        .in(UserEntity::getId, userIds));
+        new LambdaQueryWrapper<UserEntity>()
+                .select(UserEntity::getId, UserEntity::getName)
+                .in(UserEntity::getId, userIds));
 Map<Long, String> userNameMap = users.stream()
-    .collect(Collectors.toMap(UserEntity::getId, UserEntity::getName));
+        .collect(Collectors.toMap(UserEntity::getId, UserEntity::getName));
 ```
 
 - **例外：允许 JOIN 的场景** — 当关联条件本身是过滤条件的一部分时（如"查询活跃用户的待处理订单"），IN 查询会导致先查出所有数据再内存过滤，效率更差。此时允许在 XML Mapper 中写 JOIN 查询：
