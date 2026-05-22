@@ -115,5 +115,5 @@ JSON 示例 + 字段说明表格
 ## 下一步
 
 技术设计确认后，建议：
-- 调用 `/java-subagent-driven-development` 基于设计文档并行实现接口
+- 调用 `/java-development` 基于设计文档实现接口
 - 调用 `/api-test-generation` 基于设计文档生成接口测试

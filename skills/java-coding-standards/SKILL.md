@@ -19,9 +19,9 @@ Spring Boot + MyBatis-Plus 项目的编码规范。
 - **模型类**: 输入输出模型使用 `Req`/`Resp` 后缀
 
 ## Lombok 使用
-- 优先使用 `@Getter`、`@Setter`、`@Data` 等 Lombok 注解减少样板代码
-- Entity 类使用 `@Data` 或 `@Getter/@Setter`
-- 使用 `@Accessors(chain = true)` 支持链式调用
+- 优先使用 `@Getter`、`@Setter` 等 Lombok 注解减少样板代码
+- Entity 类统一使用 `@Getter`、`@Setter`、`@ToString`、`@Accessors(chain = true)`
+- 避免在 Entity 类使用 `@Data`，防止自动生成的 `equals/hashCode` 引入隐性问题
 
 ## 语言规范
 - 所有模型输入、输出和代码注释必须使用中文语言

@@ -29,7 +29,7 @@ description: "Java 后端专用。基于设计文档进行 Java 后端开发。T
 
 ### Phase 4：验证
 
-调用 `java-code-review` 技能，完成编译检查和规范审查。
+调用 `java-coding-review` 技能，完成编译检查和规范审查。
 
 ---
 
