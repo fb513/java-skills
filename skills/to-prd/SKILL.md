@@ -1,5 +1,5 @@
 ---
-name: write-prd
+name: to-prd
 description: "基于当前对话上下文生成或更新 PRD 文档。TRIGGER when: 用户在需求探索（grill-me）之后要求生成 PRD、明确要求把讨论结果整理成 PRD，或要求将已确认的需求合并进已有 PRD。SKIP: 只做错别字/格式微调，或需求仍未探索清楚且用户没有要求先整理草稿。"
 ---
 
